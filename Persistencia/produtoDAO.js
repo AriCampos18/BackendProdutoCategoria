@@ -19,7 +19,7 @@ export default class ProdutoDAO {
                 prod_precoCusto DECIMAL(10,2) NOT NULL,
                 prod_precoVenda DECIMAL(10,2) NOT NULL,
                 prod_qtdEstoque INT NOT NULL DEFAULT 0,
-                prod_urlImagem VARCHAR(250),
+                prod_urlImagem VARCHAR(350),
                 prod_dataValidade DATE NOT NULL,
                 fk_codigo_cat INT NOT NULL,
                 CONSTRAINT pk_produto PRIMARY KEY(prod_codigo),
@@ -110,10 +110,11 @@ export default class ProdutoDAO {
         await conexao.release();
         return listaProdutos;
     }
+
     async excluir(produto) {
         if (produto instanceof Produto) {
             const conexao = await conectar();
-            const sql = `DELETE FROM produto WHERE codigo = ?`;
+            const sql = `DELETE FROM produto WHERE prod_codigo = ?`;
             let parametros = [
                 produto.codigo
             ]; //dados do produto

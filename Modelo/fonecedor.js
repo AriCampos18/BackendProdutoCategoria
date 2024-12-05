@@ -1,7 +1,7 @@
 import FornecedorDAO from "../Persistencia/fornecedorDAO.js";
 import Categoria from "./categoria.js";
 
-export default class Produto{
+export default class Fornecedor{
     //atributos privados
     #cnpj;
     #nomeEmpresa;

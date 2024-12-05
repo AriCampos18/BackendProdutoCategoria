@@ -1,5 +1,5 @@
-import Fornecedor from "../Modelo/fornecedor.js";
-import Categoria from "./categoria.js";
+import Fornecedor from "../Modelo/fonecedor.js";
+import Categoria from "../Modelo/categoria.js";
 
 import conectar from "./Conexao.js";
 export default class FornecedorDAO {

@@ -192,9 +192,9 @@ export default class FornecedorCtrl {
         if (requisicao.method == "GET") {
             let cnpj = requisicao.params.cnpj;
             //evitar que código tenha valor undefined
-            /*if (isNaN(codigo)) {
-                codigo = "";
-            }*/
+            if (!cnpj) {
+                cnpj = "";
+            }
 
             const fornecedor = new Fornecedor();
             //método consultar retorna uma lista de produtos

@@ -151,11 +151,11 @@ export default class ClienteCtrl {
     consultar(requisicao, resposta) {
         resposta.type("application/json");
         if (requisicao.method == "GET") {
-            /*let cpf = requisicao.params.cpf;*/
+            let cpf = requisicao.params.cpf;
             //evitar que código tenha valor undefined
-            /*if (isNaN(cpf)) {
-                codigo = "";
-            }*/
+            if (!cpf) {
+                cpf= "";
+            }
 
             const cliente = new Cliente();
             //método consultar retorna uma lista de produtos

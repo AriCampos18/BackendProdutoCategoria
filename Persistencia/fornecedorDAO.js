@@ -16,7 +16,7 @@ export default class FornecedorDAO {
                 forn_cnpj VARCHAR(18) NOT NULL,
                 forn_nomeEmpresa VARCHAR(200) NOT NULL,
                 forn_nomeResponsavel VARCHAR(200) NOT NULL,
-                forn_telefone VARCHAR(20) NOT NULL,
+                forn_telefone VARCHAR(50) NOT NULL,
                 forn_email VARCHAR(100) NOT NULL,
                 forn_endereco VARCHAR(350) NOT NULL,
                 forn_cidade VARCHAR(350) NOT NULL,

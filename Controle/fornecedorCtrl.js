@@ -1,5 +1,5 @@
 //É a classe responsável por traduzir requisições HTTP e produzir respostas HTTP
-import Fornecedor from "../Modelo/fornecedor.js";
+import Fornecedor from "../Modelo/fonecedor.js";
 import Categoria from "../Modelo/categoria.js";
 
 export default class FornecedorCtrl {

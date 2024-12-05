@@ -16,11 +16,11 @@ export default class FornecedorDAO {
                 forn_cnpj VARCHAR(18) NOT NULL,
                 forn_nomeEmpresa VARCHAR(200) NOT NULL,
                 forn_nomeResponsavel VARCHAR(200) NOT NULL,
-                forn_telefone VARCHAR(12) NOT NULL,
+                forn_telefone VARCHAR(15) NOT NULL,
                 forn_email VARCHAR(100) NOT NULL,
                 forn_endereco VARCHAR(350) NOT NULL,
                 forn_cidade VARCHAR(350) NOT NULL,
-                forn_uf VARCHAR(50) NOT NULL,
+                forn_uf VARCHAR(70) NOT NULL,
                 CONSTRAINT pk_fornecedor PRIMARY KEY(forn_cnpj),
             )
         `;

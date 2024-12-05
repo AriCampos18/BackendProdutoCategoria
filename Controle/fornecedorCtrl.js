@@ -112,8 +112,8 @@ export default class FornecedorCtrl {
         //Verificando se o método da requisição é POST e conteúdo é JSON
         if (requisicao.method == 'DELETE') {
             //o código será extraída da URL (padrão REST)
-            let cnpj = requisicao.params.cnpj;
-            cnpj=encodeURIComponent(cnpj);
+            const cnpj = requisicao.params.cnpj;
+
             //pseudo validação
             if (cnpj!="") {
                 //alterar o produto

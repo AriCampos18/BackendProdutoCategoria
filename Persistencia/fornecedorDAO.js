@@ -23,7 +23,7 @@ export default class FornecedorDAO {
                 forn_uf VARCHAR(50) NOT NULL,
                 fk_codigo_cat INT NOT NULL,
                 CONSTRAINT pk_fornecedor PRIMARY KEY(forn_cnpj),
-                CONSTRAINT fk_categoria FOREIGN KEY(fk_codigo_cat) REFERENCES categoria(codigo)
+                CONSTRAINT fk_categoria_forn FOREIGN KEY(fk_codigo_cat) REFERENCES categoria(codigo)
             )
         `;
             await conexao.execute(sql);

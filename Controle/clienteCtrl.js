@@ -14,11 +14,11 @@ export default class ClienteCtrl {
             const telefone = requisicao.body.telefone;
             const endereco = requisicao.body.endereco;
             const cidade = requisicao.body.cidade;
-            const estado = requisicao.body.estado;
+            const uf = requisicao.body.uf;
            
-            if (cpf && nome && dataNasc && telefone && endereco && cidade && estado) {
+            if (cpf && nome && dataNasc && telefone && endereco && cidade && uf) {
 
-                const cliente = new Cliente(cpf, nome, dataNasc, telefone, endereco, cidade, estado);
+                const cliente = new Cliente(cpf, nome, dataNasc, telefone, endereco, cidade, uf);
 
                     cliente.incluir()
                         .then(() => {
@@ -66,11 +66,11 @@ export default class ClienteCtrl {
             const telefone = requisicao.body.telefone;
             const endereco = requisicao.body.endereco;
             const cidade = requisicao.body.cidade;
-            const estado = requisicao.body.estado;
+            const uf = requisicao.body.uf;
    
-            if (cpf && nome && dataNasc && telefone && endereco && cidade && estado) {
+            if (cpf && nome && dataNasc && telefone && endereco && cidade && uf) {
              
-                const cliente = new Cliente(cpf, nome, dataNasc, telefone, endereco, cidade, estado);
+                const cliente = new Cliente(cpf, nome, dataNasc, telefone, endereco, cidade, uf);
                 cliente.alterar()
                     .then(() => {
                         resposta.status(200).json({

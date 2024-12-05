@@ -8,7 +8,7 @@ export default class Cliente{
     #telefone
     #endereco
     #cidade
-    #estado
+    #uf
 
     get cpf(){
         return this.#cpf;
@@ -58,24 +58,24 @@ export default class Cliente{
         this.#cidade=novaCidade;
     }
 
-    get estado(){
-        return this.#estado;
+    get uf(){
+        return this.#uf;
     }
 
-    set estado(novoEstado){
-        this.#estado = novoEstado;
+    set uf(novoUf){
+        this.#uf = novoUf;
     }
 
     //construtor (criador de um produto)
     constructor(cpf="", nome="", dataNasc="",telefone="",endereco="",
-                cidade="", estado=""){
+                cidade="", uf=""){
         this.#cpf=cpf;
         this.#nome=nome;
         this.#dataNasc=dataNasc;
         this.#telefone = telefone;
         this.#endereco=endereco;
         this.#cidade=cidade;
-        this.#estado=estado;            
+        this.#uf=uf;            
     }
 
     //override do método toJSON
@@ -89,7 +89,7 @@ export default class Cliente{
             "telefone":this.#telefone,
             "endereco":this.#endereco,
             "cidade":this.#cidade,
-            "estado":this.#estado     
+            "uf":this.#uf     
         }
     }
 

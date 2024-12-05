@@ -19,7 +19,7 @@ export default class ClienteDAO {
                 clie_telefone VARCHAR(14) NOT NULL,
                 clie_endereco VARCHAR(200),
                 clie_cidade VARCHAR(200),
-                clie_estado VARCHAR(200),
+                clie_uf VARCHAR(200),
                 CONSTRAINT pk_cliente PRIMARY KEY(clie_cpf), 
             )
         `;
@@ -34,7 +34,7 @@ export default class ClienteDAO {
     async incluir(cliente) {
         if (cliente instanceof Cliente) {
             const conexao = await conectar();
-            const sql = `INSERT INTO cliente(clie_cpf,clie_nome,clie_dataNasc,clie_telefone,clie_endereco,clie_cidade, clie_estado)
+            const sql = `INSERT INTO cliente(clie_cpf,clie_nome,clie_dataNasc,clie_telefone,clie_endereco,clie_cidade, clie_uf)
                 values(?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?)
             `;
             let parametros = [
@@ -44,7 +44,7 @@ export default class ClienteDAO {
                 cliente.telefone,
                 cliente.endereco,
                 cliente.cidade,
-                cliente.estado
+                cliente.uf
             ]; //dados do produto
             const resultado = await conexao.execute(sql, parametros);
             await conexao.release(); //libera a conexão
@@ -63,7 +63,7 @@ export default class ClienteDAO {
                 cliente.telefone,
                 cliente.endereco,
                 cliente.cidade,
-                cliente.estado
+                cliente.uf
             ]; //dados do produto
             await conexao.execute(sql, parametros);
             await conexao.release(); //libera a conexão
@@ -94,7 +94,7 @@ export default class ClienteDAO {
                 linha['clie_telefone'],
                 linha['clie_endereco'],
                 linha['clie_cidade'],
-                linha['clie_estado']
+                linha['clie_uf']
             );
             listaClientes.push(cliente);
         }

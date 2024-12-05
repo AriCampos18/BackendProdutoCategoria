@@ -11,7 +11,6 @@ export default class Fornecedor{
     #endereco;
     #cidade;
     #uf
-    #categoria
 
     get cnpj(){
         return this.#cnpj;
@@ -77,19 +76,9 @@ export default class Fornecedor{
         this.#uf = novoUf;
     }
 
-    get categoria(){
-        return this.#categoria
-    }
-
-    set categoria(novaCategoria){
-        if (novaCategoria instanceof Categoria){
-            this.#categoria = novaCategoria;
-        }
-    }
-
     //construtor (criador de um produto)
     constructor(cnpj="", nomeEmpresa="",nomeResponsavel="",telefone="",email="",
-                endereco="", cidade="", uf="", categoria={}){
+                endereco="", cidade="", uf=""){
         this.#cnpj=cnpj;
         this.#nomeEmpresa=nomeEmpresa;
         this.#nomeResponsavel=nomeResponsavel;
@@ -98,7 +87,6 @@ export default class Fornecedor{
         this.#endereco=endereco;
         this.#cidade=cidade;            
         this.#uf = uf;
-        this.#categoria = categoria;
     }
 
     //override do método toJSON
@@ -114,7 +102,6 @@ export default class Fornecedor{
             "endereco":this.#endereco,
             "cidade":this.#cidade,
             "uf":this.#uf,
-            "categoria":this.#categoria
         }
     }
 

@@ -17,15 +17,10 @@ export default class FornecedorCtrl {
             const endereco = requisicao.body.endereco;
             const cidade = requisicao.body.cidade;
             const uf = requisicao.body.uf;
-            const categoria = requisicao.body.categoria;
-            const categ = new Categoria(categoria.codigo);
-            categ.consultar(categoria.codigo).then((listaCategorias) => {
-                if (listaCategorias.length > 0) {
-                    //pseudo validação
-                    if (cnpj && nomeEmpresa && nomeResponsavel && telefone && email && endereco && cidade && uf && categoria.codigo > 0) {
+            if (cnpj && nomeEmpresa && nomeResponsavel && telefone && email && endereco && cidade && uf) {
                         //gravar o produto
 
-                        const fornecedor = new Fornecedor(cnpj, nomeEmpresa, nomeResponsavel, telefone, email, endereco, cidade, uf, categ);
+                        const fornecedor = new Fornecedor(cnpj, nomeEmpresa, nomeResponsavel, telefone, email, endereco, cidade, uf);
 
                         fornecedor.incluir()
                             .then(() => {
@@ -41,28 +36,16 @@ export default class FornecedorCtrl {
                                     "mensagem": "Não foi possível incluir o fornecedor: " + erro.message
                                 });
                             });
-                    }
-                    else {
-                        resposta.status(400).json(
-                            {
-                                "status": false,
-                                "mensagem": "Informe corretamente todos os dados de um fornecedor conforme documentação da API."
-                            }
-                        );
-                    }
-                }
-                else {
-                    resposta.status(400).json({
+            }
+            else {
+                resposta.status(400).json(
+                    {
                         "status": false,
-                        "mensagem": "A categoria informada não existe!"
-                    });
-                }
-            }).catch((erro) => {
-                resposta.status(500).json({
-                    "status": false,
-                    "mensagem": "Não foi possível validar a categoria: " + erro.message
-                });
-            });
+                        "mensagem": "Informe corretamente todos os dados de um fornecedor conforme documentação da API."
+                    }
+                );
+            }
+          
         }
         else {
             resposta.status(400).json({
@@ -87,14 +70,9 @@ export default class FornecedorCtrl {
             const endereco = requisicao.body.endereco;
             const cidade = requisicao.body.cidade;
             const uf = requisicao.body.uf;
-            const categoria = requisicao.body.categoria;
-            const categ = new Categoria(categoria.codigo);
-            categ.consultar(categoria.codigo).then((lista) => {
-                if (lista.length > 0) {
-                    //pseudo validação
-                    if (cnpj && nomeEmpresa && nomeResponsavel && telefone && email && endereco && cidade && uf && categoria.codigo > 0) {
+            if (cnpj && nomeEmpresa && nomeResponsavel && telefone && email && endereco && cidade && uf) {
                         //alterar o produto
-                        const fornecedor = new Fornecedor(cnpj, nomeEmpresa, nomeResponsavel, telefone, email, endereco, cidade, uf, categ);
+                        const fornecedor = new Fornecedor(cnpj, nomeEmpresa, nomeResponsavel, telefone, email, endereco, cidade, uf);
                         fornecedor.alterar()
                             .then(() => {
                                 resposta.status(200).json({
@@ -108,31 +86,16 @@ export default class FornecedorCtrl {
                                     "mensagem": "Não foi possível alterar o fornecedor: " + erro.message
                                 });
                             });
-                    }
-                    else {
-                        resposta.status(400).json(
-                            {
-                                "status": false,
-                                "mensagem": "Informe corretamente todos os dados de um fornecedor conforme documentação da API."
-                            }
-                        );
-                    }
-
-                }
-                else {
-                    resposta.status(400).json({
+                
+            }
+            else {
+                resposta.status(400).json(
+                    {
                         "status": false,
-                        "mensagem": "A categoria informada não existe!"
-                    });
-                }
-
-            }).catch((erro) => {
-                resposta.status(500).json({
-                    "status": false,
-                    "mensagem": "Não foi possível validar a categoria: " + erro.message
-                });
-            });
-
+                        "mensagem": "Informe corretamente todos os dados de um fornecedor conforme documentação da API."
+                    }
+                );
+            }
         }
         else {
             resposta.status(400).json({

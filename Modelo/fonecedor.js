@@ -1,4 +1,5 @@
 import FornecedorDAO from "../Persistencia/fornecedorDAO.js";
+import Categoria from "./categoria.js";
 
 export default class Produto{
     //atributos privados
@@ -9,7 +10,8 @@ export default class Produto{
     #email;
     #endereco;
     #cidade;
-    #estado
+    #uf
+    #categoria
 
     get cnpj(){
         return this.#cnpj;
@@ -67,17 +69,27 @@ export default class Produto{
         this.#cidade = novaCidade;
     }
 
-    get estado(){
-        return this.#estado
+    get uf(){
+        return this.#uf
     }
 
-    set estado(novoEstado){
-        this.#estado = novoEstado;
+    set uf(novoUf){
+        this.#uf = novoUf;
+    }
+
+    get categoria(){
+        return this.#categoria
+    }
+
+    set categoria(novaCategoria){
+        if (novaCategoria instanceof Categoria){
+            this.#categoria = novaCategoria;
+        }
     }
 
     //construtor (criador de um produto)
     constructor(cnpj="", nomeEmpresa="",nomeResponsavel="",telefone="",email="",
-                endereco="", cidade="", estado=""){
+                endereco="", cidade="", uf=""){
         this.#cnpj=cnpj;
         this.#nomeEmpresa=nomeEmpresa;
         this.#nomeResponsavel=nomeResponsavel;
@@ -85,7 +97,8 @@ export default class Produto{
         this.#email=email;
         this.#endereco=endereco;
         this.#cidade=cidade;            
-        this.#estado = estado;
+        this.#uf = uf;
+        this.#categoria = categoria;
     }
 
     //override do método toJSON
@@ -100,13 +113,14 @@ export default class Produto{
             "email":this.#email,
             "endereco":this.#endereco,
             "cidade":this.#cidade,
-            "estado":this.#estado
+            "estado":this.#uf,
+            "categoria":this.#categoria
         }
     }
 
     async incluir(){
         //instanciar a camada de persistencia do produto
-        const fornDAO = new FonecedorDAO();
+        const fornDAO = new FornecedorDAO();
         await fornDAO.incluir(this); //this referência a si mesmo
     }
 

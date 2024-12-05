@@ -1,4 +1,5 @@
 import Fornecedor from "../Modelo/fornecedor.js";
+import Categoria from "./categoria.js";
 
 import conectar from "./Conexao.js";
 export default class FornecedorDAO {
@@ -19,8 +20,10 @@ export default class FornecedorDAO {
                 forn_email VARCHAR(100) NOT NULL,
                 forn_endereco VARCHAR(350) NOT NULL,
                 forn_cidade VARCHAR(350) NOT NULL,
-                forn_estado VARCHAR(50) NOT NULL,
+                forn_uf VARCHAR(50) NOT NULL,
+                fk_codigo_cat INT NOT NULL,
                 CONSTRAINT pk_fornecedor PRIMARY KEY(forn_cnpj),
+                CONSTRAINT fk_categoria FOREIGN KEY(fk_codigo_cat) REFERENCES categoria(codigo)
             )
         `;
             await conexao.execute(sql);
@@ -34,8 +37,8 @@ export default class FornecedorDAO {
     async incluir(fornecedor) {
         if (fornecedor instanceof Fornecedor) {
             const conexao = await conectar();
-            const sql = `INSERT INTO fornecedor(forn_cnpj, forn_nomeEmpresa, forn_nomeResponsavel, forn_telefone, forn_email, forn_endereco, forn_cidade, forn_estado)
-                values(?,?,?,?,?,?,?,?)
+            const sql = `INSERT INTO fornecedor(forn_cnpj, forn_nomeEmpresa, forn_nomeResponsavel, forn_telefone, forn_email, forn_endereco, forn_cidade, forn_uf,fk_codigo_cat)
+                values(?,?,?,?,?,?,?,?,?)
             `;
             let parametros = [
                 fornecedor.cnpj,
@@ -45,7 +48,8 @@ export default class FornecedorDAO {
                 fornecedor.email,
                 fornecedor.endereco,
                 fornecedor.cidade,
-                fornecedor.estado
+                fornecedor.uf,
+                fornecedor.categoria.codigo
             ]; //dados do produto
             const resultado = await conexao.execute(sql, parametros);
             await conexao.release(); //libera a conexão
@@ -54,7 +58,7 @@ export default class FornecedorDAO {
     async alterar(fornecedor) {
         if (fornecedor instanceof Fornecedor) {
             const conexao = await conectar();
-            const sql = `UPDATE fornecedor SET foorn_cnpj=?,forn_nomeEmpresa=?,forn_nomeResponsavel=?,forn_telefone=?,forn_email=?,forn_endereco=?, forn_cidade=?,forn_estado=?
+            const sql = `UPDATE fornecedor SET forn_cnpj=?,forn_nomeEmpresa=?,forn_nomeResponsavel=?,forn_telefone=?,forn_email=?,forn_endereco=?, forn_cidade=?,forn_uf=?,fk_codigo_cat = ? WHERE forn_cnpj=?
             `;
             let parametros = [
                 fornecedor.cnpj,
@@ -64,7 +68,8 @@ export default class FornecedorDAO {
                 fornecedor.email,
                 fornecedor.endereco,
                 fornecedor.cidade,
-                fornecedor.estado
+                fornecedor.uf,
+                fornecedor.categoria.codigo,
             ]; //dados do produto
             await conexao.execute(sql, parametros);
             await conexao.release(); //libera a conexão
@@ -75,7 +80,7 @@ export default class FornecedorDAO {
         const conexao = await conectar();
         let sql = "";
         let parametros = [];
-        if (isNaN(parseInt(termo))) {
+        if (termo=="") {
             sql = `SELECT * FROM fornecedor
                    WHERE forn_nomeEmpresa LIKE ?`;
             parametros = ['%' + termo + '%'];
@@ -88,6 +93,7 @@ export default class FornecedorDAO {
         const [linhas, campos] = await conexao.execute(sql, parametros);
         let listaFornecedores = [];
         for (const linha of linhas) {  
+            const categoria = new Categoria(linha['codigo'],linha["descricao"]); 
             const fornecedor = new Fornecedor(
                 linha['forn_cnpj'],
                 linha['forn_nomeEmpresa'],
@@ -96,7 +102,8 @@ export default class FornecedorDAO {
                 linha['forn_email'],
                 linha['forn_endereco'],
                 linha['forn_cidade'],
-                linha['forn_estado']
+                linha['forn_estado'],
+                categoria
             );
             listaFornecedores.push(fornecedor);
         }

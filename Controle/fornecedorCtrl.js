@@ -1,5 +1,6 @@
+//É a classe responsável por traduzir requisições HTTP e produzir respostas HTTP
 import Fornecedor from "../Modelo/fornecedor.js";
-//import Categoria from "../Modelo/categoria.js";
+import Categoria from "../Modelo/categoria.js";
 
 export default class FornecedorCtrl {
 
@@ -8,38 +9,36 @@ export default class FornecedorCtrl {
         resposta.type("application/json");
         //Verificando se o método da requisição é POST e conteúdo é JSON
         if (requisicao.method == 'POST' && requisicao.is("application/json")) {
-            const cnpj = requisicao.body.cnpj;
+            const cnpj = requisicao.params.cnpj;
             const nomeEmpresa = requisicao.body.nomeEmpresa;
             const nomeResponsavel = requisicao.body.nomeResponsavel;
             const telefone = requisicao.body.telefone;
             const email = requisicao.body.email;
             const endereco = requisicao.body.endereco;
             const cidade = requisicao.body.cidade;
-            const estado = requisicao.body.estado;
-            categ.consultar(categoria.codigo).then /*implementar as categorias no fornecedor*/((listaCategorias) => {
+            const uf = requisicao.body.uf;
+            const categoria = requisicao.body.categoria;
+            const categ = new Categoria(categoria.codigo);
+            categ.consultar(categoria.codigo).then((listaCategorias) => {
                 if (listaCategorias.length > 0) {
                     //pseudo validação
-                    if (cnpj && nomeEmpresa &&
-                        nomeResponsavel && telefone &&
-                        email && endereco && cidade && estado && categoria.codigo > 0) {
+                    if (cnpj && nomeEmpresa && nomeResponsavel && telefone && email && endereco && cidade && uf && categoria.codigo > 0) {
                         //gravar o produto
 
-                        const fornecedor = new Produto(0,
-                            descricao, precoCusto, precoVenda,
-                            qtdEstoque, urlImagem, dataValidade, categ);
+                        const fornecedor = new Fornecedor(cnpj, nomeEmpresa, nomeResponsavel, telefone, email, endereco, cidade, uf, categ);
 
-                        produto.incluir()
+                        fornecedor.incluir()
                             .then(() => {
                                 resposta.status(200).json({
                                     "status": true,
-                                    "mensagem": "Produto adicionado com sucesso!",
-                                    "codigo": produto.codigo
+                                    "mensagem": "Fornecedor adicionado com sucesso!",
+                                    "cnpj": fornecedor.cnpj
                                 });
                             })
                             .catch((erro) => {
                                 resposta.status(500).json({
                                     "status": false,
-                                    "mensagem": "Não foi possível incluir o produto: " + erro.message
+                                    "mensagem": "Não foi possível incluir o fornecedor: " + erro.message
                                 });
                             });
                     }
@@ -47,7 +46,7 @@ export default class FornecedorCtrl {
                         resposta.status(400).json(
                             {
                                 "status": false,
-                                "mensagem": "Informe corretamente todos os dados de um produto conforme documentação da API."
+                                "mensagem": "Informe corretamente todos os dados de um fornecedor conforme documentação da API."
                             }
                         );
                     }
@@ -81,37 +80,32 @@ export default class FornecedorCtrl {
         //Verificando se o método da requisição é POST e conteúdo é JSON
         if ((requisicao.method == 'PUT' || requisicao.method == 'PATCH') && requisicao.is("application/json")) {
             //o código será extraída da URL (padrão REST)
-            const codigo = requisicao.params.codigo;
-            const descricao = requisicao.body.descricao;
-            const precoCusto = requisicao.body.precoCusto;
-            const precoVenda = requisicao.body.precoVenda;
-            const qtdEstoque = requisicao.body.qtdEstoque;
-            const urlImagem = requisicao.body.urlImagem;
-            const dataValidade = requisicao.body.dataValidade;
+            const nomeEmpresa = requisicao.body.nomeEmpresa;
+            const nomeResponsavel = requisicao.body.nomeResponsavel;
+            const telefone = requisicao.body.telefone;
+            const email = requisicao.body.email;
+            const endereco = requisicao.body.endereco;
+            const cidade = requisicao.body.cidade;
+            const uf = requisicao.body.uf;
             const categoria = requisicao.body.categoria;
-            //validação de regra de negócio
             const categ = new Categoria(categoria.codigo);
             categ.consultar(categoria.codigo).then((lista) => {
                 if (lista.length > 0) {
                     //pseudo validação
-                    if (codigo > 0 && descricao && precoCusto > 0 &&
-                        precoVenda > 0 && qtdEstoque >= 0 &&
-                        urlImagem && dataValidade && categoria.codigo > 0) {
+                    if (cnpj && nomeEmpresa && nomeResponsavel && telefone && email && endereco && cidade && uf && categoria.codigo > 0) {
                         //alterar o produto
-                        const produto = new Produto(codigo,
-                            descricao, precoCusto, precoVenda,
-                            qtdEstoque, urlImagem, dataValidade, categ);
-                        produto.alterar()
+                        const fornecedor = new Fornecedor(cnpj, nomeEmpresa, nomeResponsavel, telefone, email, endereco, cidade, uf, categ);
+                        fornecedor.alterar()
                             .then(() => {
                                 resposta.status(200).json({
                                     "status": true,
-                                    "mensagem": "Produto alterado com sucesso!",
+                                    "mensagem": "Fornecedor alterado com sucesso!",
                                 });
                             })
                             .catch((erro) => {
                                 resposta.status(500).json({
                                     "status": false,
-                                    "mensagem": "Não foi possível alterar o produto: " + erro.message
+                                    "mensagem": "Não foi possível alterar o fornecedor: " + erro.message
                                 });
                             });
                     }
@@ -119,7 +113,7 @@ export default class FornecedorCtrl {
                         resposta.status(400).json(
                             {
                                 "status": false,
-                                "mensagem": "Informe corretamente todos os dados de um produto conforme documentação da API."
+                                "mensagem": "Informe corretamente todos os dados de um fornecedor conforme documentação da API."
                             }
                         );
                     }
@@ -155,22 +149,22 @@ export default class FornecedorCtrl {
         //Verificando se o método da requisição é POST e conteúdo é JSON
         if (requisicao.method == 'DELETE') {
             //o código será extraída da URL (padrão REST)
-            const codigo = requisicao.params.codigo;
+            const cnpj = requisicao.params.cnpj;
             //pseudo validação
-            if (codigo > 0) {
+            if (cnpj!="") {
                 //alterar o produto
-                const produto = new Produto(codigo);
-                produto.excluir()
+                const fornecedor = new Fornecedor(cnpj);
+                fornecedor.excluir()
                     .then(() => {
                         resposta.status(200).json({
                             "status": true,
-                            "mensagem": "Produto excluído com sucesso!",
+                            "mensagem": "Fornecedor excluído com sucesso!",
                         });
                     })
                     .catch((erro) => {
                         resposta.status(500).json({
                             "status": false,
-                            "mensagem": "Não foi possível excluir o produto: " + erro.message
+                            "mensagem": "Não foi possível excluir o fornecedor: " + erro.message
                         });
                     });
             }
@@ -178,7 +172,7 @@ export default class FornecedorCtrl {
                 resposta.status(400).json(
                     {
                         "status": false,
-                        "mensagem": "Informe um código válido de um produto conforme documentação da API."
+                        "mensagem": "Informe um código válido de um fornecedor conforme documentação da API."
                     }
                 );
             }
@@ -196,28 +190,24 @@ export default class FornecedorCtrl {
     consultar(requisicao, resposta) {
         resposta.type("application/json");
         if (requisicao.method == "GET") {
-            let codigo = requisicao.params.codigo;
+            let cnpj = requisicao.params.cnpj;
             //evitar que código tenha valor undefined
-            if (isNaN(codigo)) {
+            /*if (isNaN(codigo)) {
                 codigo = "";
-            }
+            }*/
 
-            const produto = new Produto();
+            const fornecedor = new Fornecedor();
             //método consultar retorna uma lista de produtos
-            produto.consultar(codigo)
-                .then((listaProdutos) => {
-                    resposta.status(200).json(listaProdutos
-                        /*{
-                            "status": true,
-                            "listaProdutos": listaProdutos
-                        }*/
+            fornecedor.consultar(cnpj)
+                .then((listaFornecedores) => {
+                    resposta.status(200).json(listaFornecedores
                     );
                 })
                 .catch((erro) => {
                     resposta.status(500).json(
                         {
                             "status": false,
-                            "mensagem": "Erro ao consultar produtos: " + erro.message
+                            "mensagem": "Erro ao consultar fornecedores: " + erro.message
                         }
                     );
                 });

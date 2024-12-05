@@ -1,6 +1,5 @@
 //É a classe responsável por traduzir requisições HTTP e produzir respostas HTTP
 import Fornecedor from "../Modelo/fonecedor.js";
-import Categoria from "../Modelo/categoria.js";
 
 export default class FornecedorCtrl {
 
@@ -63,6 +62,7 @@ export default class FornecedorCtrl {
         //Verificando se o método da requisição é POST e conteúdo é JSON
         if ((requisicao.method == 'PUT' || requisicao.method == 'PATCH') && requisicao.is("application/json")) {
             //o código será extraída da URL (padrão REST)
+            const cnpj = requisicao.params.cnpj;
             const nomeEmpresa = requisicao.body.nomeEmpresa;
             const nomeResponsavel = requisicao.body.nomeResponsavel;
             const telefone = requisicao.body.telefone;

@@ -113,7 +113,7 @@ export default class Produto{
             "email":this.#email,
             "endereco":this.#endereco,
             "cidade":this.#cidade,
-            "estado":this.#uf,
+            "uf":this.#uf,
             "categoria":this.#categoria
         }
     }

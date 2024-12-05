@@ -89,7 +89,7 @@ export default class Fornecedor{
 
     //construtor (criador de um produto)
     constructor(cnpj="", nomeEmpresa="",nomeResponsavel="",telefone="",email="",
-                endereco="", cidade="", uf=""){
+                endereco="", cidade="", uf="", categoria={}){
         this.#cnpj=cnpj;
         this.#nomeEmpresa=nomeEmpresa;
         this.#nomeResponsavel=nomeResponsavel;

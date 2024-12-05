@@ -81,14 +81,14 @@ export default class FornecedorDAO {
         let sql = "";
         let parametros = [];
         if (termo=="") {
-            sql = `SELECT * FROM fornecedor
-            INNER JOIN categoria c ON p.fk_codigo_cat = c.codigo
+            sql = `SELECT * FROM fornecedor f
+            INNER JOIN categoria c ON f.fk_codigo_cat = c.codigo
                    WHERE forn_nomeEmpresa LIKE ?`;
             parametros = ['%' + termo + '%'];
         }
         else {
-            sql = `SELECT * FROM fornecedor
-             INNER JOIN categoria c ON p.fk_codigo_cat = c.codigo 
+            sql = `SELECT * FROM fornecedor f
+             INNER JOIN categoria c ON f.fk_codigo_cat = c.codigo 
                    WHERE forn_cnpj = ?`
             parametros = [termo];
         }

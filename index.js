@@ -38,8 +38,7 @@ app.use("/produtos",rotaProduto);
 app.use("/categorias",rotaCategoria);
 app.use("/clientes", rotaCliente);
 app.use("/fornecedores", rotaFornecedor);
-//app.use('/clientes',rotaCliente);
-//app.use('/fornecedores', rotaFornecedor);
+
 //app.use('/usuarios', rotaUsuario);
 
 /*app.get('/',(requisicao, resposta)=>{

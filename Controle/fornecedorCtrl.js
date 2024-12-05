@@ -9,7 +9,7 @@ export default class FornecedorCtrl {
         resposta.type("application/json");
         //Verificando se o método da requisição é POST e conteúdo é JSON
         if (requisicao.method == 'POST' && requisicao.is("application/json")) {
-            const cnpj = requisicao.params.cnpj;
+            const cnpj = requisicao.body.cnpj;
             const nomeEmpresa = requisicao.body.nomeEmpresa;
             const nomeResponsavel = requisicao.body.nomeResponsavel;
             const telefone = requisicao.body.telefone;

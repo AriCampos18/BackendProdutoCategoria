@@ -82,11 +82,13 @@ export default class FornecedorDAO {
         let parametros = [];
         if (termo=="") {
             sql = `SELECT * FROM fornecedor
+            INNER JOIN categoria c ON p.fk_codigo_cat = c.codigo
                    WHERE forn_nomeEmpresa LIKE ?`;
             parametros = ['%' + termo + '%'];
         }
         else {
             sql = `SELECT * FROM fornecedor
+             INNER JOIN categoria c ON p.fk_codigo_cat = c.codigo 
                    WHERE forn_cnpj = ?`
             parametros = [termo];
         }
@@ -102,7 +104,7 @@ export default class FornecedorDAO {
                 linha['forn_email'],
                 linha['forn_endereco'],
                 linha['forn_cidade'],
-                linha['forn_estado'],
+                linha['forn_uf'],
                 categoria
             );
             listaFornecedores.push(fornecedor);

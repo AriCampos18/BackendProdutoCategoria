@@ -81,9 +81,9 @@ export default class UsuarioCtrl {
             const idade = requisicao.body.idade;
             const endereco = requisicao.body.endereco;
             const privilegio = requisicao.body.privilegio;
-            const priv =  requisicao.body.priv;
+            const priv =  new Privilegio(privilegio.codigo);
 
-           priv.consultar = new Privilegio(privilegio.codigo).then((lista) => {
+           priv.consultar(privilegio.codigo).then((lista) => {
                 if(lista.length > 0){
                     if (id > 0 && nome && email && senha &&
                     idade > 0 && endereco && privilegio.codigo) {

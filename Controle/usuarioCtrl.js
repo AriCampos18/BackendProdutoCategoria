@@ -17,7 +17,7 @@ export default class UsuarioCtrl {
                 if(listaPrivilegios.length > 0){
                     if (nome && email &&
                     senha && idade > 0 &&
-                    endereco && id > 0 && privilegio.codigo > 0) {
+                    endereco && privilegio.codigo > 0) {
 
                     const usuario = new Usuario(0,
                         nome, email, senha,
@@ -73,7 +73,7 @@ export default class UsuarioCtrl {
     editar(requisicao, resposta) {
         resposta.type("application/json");
         if ((requisicao.method == 'PUT' || requisicao.method == 'PATCH') && requisicao.is("application/json")) {
-            const id = requisicao.body.id;
+            const id = requisicao.params.id;
             const nome = requisicao.body.nome;
             const email = requisicao.body.email;
             const senha = requisicao.body.senha;
@@ -86,6 +86,7 @@ export default class UsuarioCtrl {
                 if(lista.length > 0){
                     if (id > 0 && nome && email && senha &&
                     idade > 0 && endereco && privilegio.codigo > 0) {
+                        
                         const usuario = new Usuario(id,
                         nome, email, senha, idade, endereco, priv);
                         usuario.alterar()

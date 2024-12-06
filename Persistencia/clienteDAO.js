@@ -15,7 +15,7 @@ export default class ClienteDAO {
             CREATE TABLE IF NOT EXISTS cliente(
                 clie_cpf VARCHAR(15) NOT NULL,
                 clie_nome VARCHAR(200) NOT NULL,
-                clie_telefone VARCHAR(200) NOT NULL,
+                clie_telefone VARCHAR(500) NOT NULL,
                 clie_endereco VARCHAR(200),
                 clie_cidade VARCHAR(200),
                 clie_uf VARCHAR(200),

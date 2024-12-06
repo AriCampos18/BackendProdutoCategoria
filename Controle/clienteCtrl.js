@@ -38,7 +38,7 @@ export default class ClienteCtrl {
                 resposta.status(400).json(
                     {
                         "status": false,
-                        "mensagem": "Informe corretamente todos os dados de um clliente conforme documentação da API."
+                        "mensagem": "Informe corretamente todos os dados de um cliente conforme documentação da API."
                     }
                 );
             }
@@ -87,7 +87,7 @@ export default class ClienteCtrl {
                 resposta.status(400).json(
                     {
                         "status": false,
-                        "mensagem": "Informe corretamente todos os dados de um produto conforme documentação da API."
+                        "mensagem": "Informe corretamente todos os dados de um cliente conforme documentação da API."
                     }
                 );
             }

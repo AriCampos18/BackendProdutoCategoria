@@ -35,7 +35,7 @@ export default class UsuarioDAO {
         if (usuario instanceof Usuario) {
             const conexao = await conectar();
             const sql = `INSERT INTO usuario(user_nome,user_email,user_senha,user_idade,user_senha, fk_codigo_pri)
-                VALUES (?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?)
             `;
             let parametros = [
                 usuario.nome,

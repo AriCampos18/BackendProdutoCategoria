@@ -29,7 +29,7 @@ export default class UsuarioCtrl {
                             resposta.status(200).json({
                                 "status": true,
                                 "mensagem": "Usuario adicionado com sucesso!",
-                                "codigo": usuario.codigo
+                                "id": usuario.id
                             });
                         })
                         .catch((erro) => {

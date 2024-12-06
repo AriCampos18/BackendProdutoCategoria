@@ -34,7 +34,7 @@ export default class UsuarioDAO {
     async incluir(usuario) {
         if (usuario instanceof Usuario) {
             const conexao = await conectar();
-            const sql = `INSERT INTO usuario(user_nome,user_email,user_senha,user_idade,user_senha, fk_codigo_pri)
+            const sql = `INSERT INTO usuario(user_nome,user_email,user_senha,user_idade,user_senha,fk_codigo_pri)
                 VALUES (?, ?, ?, ?, ?, ?)
             `;
             let parametros = [
@@ -53,7 +53,7 @@ export default class UsuarioDAO {
     async alterar(usuario) {
         if (usuario instanceof Usuario) {
             const conexao = await conectar();
-            const sql = `UPDATE usuario SET user_nome=?,user_email=?,user_senha=?,user_idade=?,user_endereco=?,fk_codigo_pri = ?
+            const sql = `UPDATE usuario SET user_nome=?,user_email=?,user_senha=?,user_idade=?,user_endereco=?,fk_codigo_pri=?
                 WHERE user_id = ?
             `;
             let parametros = [

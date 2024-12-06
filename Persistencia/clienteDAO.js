@@ -15,7 +15,7 @@ export default class ClienteDAO {
             CREATE TABLE IF NOT EXISTS cliente(
                 clie_cpf VARCHAR(14) NOT NULL,
                 clie_nome VARCHAR(200) NOT NULL,
-                clie_dataNasc DATE,
+                clie_dataNasc DATE NOT NULL,
                 clie_telefone VARCHAR(14) NOT NULL,
                 clie_endereco VARCHAR(200),
                 clie_cidade VARCHAR(200),
@@ -35,7 +35,7 @@ export default class ClienteDAO {
         if (cliente instanceof Cliente) {
             const conexao = await conectar();
             const sql = `INSERT INTO cliente(clie_cpf,clie_nome,clie_dataNasc,clie_telefone,clie_endereco,clie_cidade, clie_uf)
-                values(?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?)
+                values(?,?,str_to_date(?,'%Y/%m/%d'),?,?,?,?)
             `;
             let parametros = [
                 cliente.cpf,
@@ -53,17 +53,17 @@ export default class ClienteDAO {
     async alterar(cliente) {
         if (cliente instanceof Cliente) {
             const conexao = await conectar();
-            const sql = `UPDATE produtocliente SET clie_cpf=?,clie_nome=?,clie_dataNasc=str_to_date(?,'%d/%m/%Y'),clie_telefone=?,clie_endereco=?,clie_cidade=?, clie_estado = ?
-                WHERE prod_codigo = ?
+            const sql = `UPDATE produtocliente SET clie_nome=?,clie_dataNasc=str_to_date(?,'%Y/%m/%d'),clie_telefone=?,clie_endereco=?,clie_cidade=?, clie_estado = ?
+                WHERE clie_cpf = ?
             `;
             let parametros = [
-                cliente.cpf,
                 cliente.nome,
                 cliente.dataNasc,
                 cliente.telefone,
                 cliente.endereco,
                 cliente.cidade,
-                cliente.uf
+                cliente.uf,
+                cliente.cpf
             ]; //dados do produto
             await conexao.execute(sql, parametros);
             await conexao.release(); //libera a conexão

@@ -38,22 +38,22 @@ export default class Privilegio{
     }
 
     async gravar(){
-        const catDAO = new CategoriaDAO();
-        await catDAO.gravar(this);
+        const priDAO = new PrivilegioDAO();
+        await priDAO.gravar(this);
     }
 
     async editar(){
-        const catDAO = new CategoriaDAO();
-        await catDAO.editar(this);
+        const priDAO = new PrivilegioDAO();
+        await priDAO.editar(this);
     }
 
     async excluir(){
-        const catDAO = new CategoriaDAO();
-        await catDAO.excluir(this);
+        const priDAO = new PrivilegioDAO();
+        await priDAO.excluir(this);
     }
 
     async consultar(termo){
-        const catDAO = new CategoriaDAO();
-        return await catDAO.consultar(termo);
+        const priDAO = new PrivilegioDAO();
+        return await priDAO.consultar(termo);
     }
 }

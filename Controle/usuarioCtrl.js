@@ -6,7 +6,6 @@ export default class UsuarioCtrl {
     gravar(requisicao, resposta) {
         resposta.type("application/json");
         if (requisicao.method == 'POST' && requisicao.is("application/json")) {
-            const id = requisicao.body.id;
             const nome = requisicao.body.nome;
             const email = requisicao.body.email;
             const senha = requisicao.body.senha;
@@ -86,7 +85,7 @@ export default class UsuarioCtrl {
            priv.consultar(privilegio.codigo).then((lista) => {
                 if(lista.length > 0){
                     if (id > 0 && nome && email && senha &&
-                    idade > 0 && endereco && privilegio.codigo) {
+                    idade > 0 && endereco && privilegio.codigo > 0) {
                         const usuario = new Usuario(id,
                         nome, email, senha, idade, endereco, priv);
                         usuario.alterar()

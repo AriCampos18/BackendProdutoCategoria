@@ -76,7 +76,7 @@ export default class UsuarioDAO {
         let parametros = [];
         if (isNaN(parseInt(termo))) {
             sql = `SELECT * FROM usuario u
-                   INNER JOIN privilegio p ON p.fk_codigo_pri = u.id
+                   INNER JOIN privilegio p ON u.fk_codigo_pri = p.id
                    WHERE user_nome LIKE ?`;
             parametros = ['%' + termo + '%'];
         }

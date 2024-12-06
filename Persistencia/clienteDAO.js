@@ -15,7 +15,6 @@ export default class ClienteDAO {
             CREATE TABLE IF NOT EXISTS cliente(
                 clie_cpf VARCHAR(14) NOT NULL,
                 clie_nome VARCHAR(200) NOT NULL,
-                clie_dataNasc DATE NOT NULL,
                 clie_telefone VARCHAR(14) NOT NULL,
                 clie_endereco VARCHAR(200),
                 clie_cidade VARCHAR(200),
@@ -34,13 +33,12 @@ export default class ClienteDAO {
     async incluir(cliente) {
         if (cliente instanceof Cliente) {
             const conexao = await conectar();
-            const sql = `INSERT INTO cliente(clie_cpf,clie_nome,clie_dataNasc,clie_telefone,clie_endereco,clie_cidade, clie_uf)
+            const sql = `INSERT INTO cliente(clie_cpf,clie_nome,clie_telefone,clie_endereco,clie_cidade, clie_uf)
                 values(?,?,?,?,?,?,?)
             `;
             let parametros = [
                 cliente.cpf,
                 cliente.nome,
-                cliente.dataNasc,
                 cliente.telefone,
                 cliente.endereco,
                 cliente.cidade,
@@ -53,12 +51,11 @@ export default class ClienteDAO {
     async alterar(cliente) {
         if (cliente instanceof Cliente) {
             const conexao = await conectar();
-            const sql = `UPDATE produtocliente SET clie_nome=?,clie_dataNasc=?,clie_telefone=?,clie_endereco=?,clie_cidade=?, clie_estado = ?
+            const sql = `UPDATE produtocliente SET clie_nome=?,clie_telefone=?,clie_endereco=?,clie_cidade=?, clie_estado = ?
                 WHERE clie_cpf = ?
             `;
             let parametros = [
                 cliente.nome,
-                cliente.dataNasc,
                 cliente.telefone,
                 cliente.endereco,
                 cliente.cidade,
@@ -90,7 +87,6 @@ export default class ClienteDAO {
             const cliente = new Cliente(
                 linha['clie_cpf'],
                 linha['clie_nome'],
-                linha['clie_dataNasc'],
                 linha['clie_telefone'],
                 linha['clie_endereco'],
                 linha['clie_cidade'],

@@ -4,7 +4,6 @@ export default class Cliente{
     //atributos privados
     #cpf
     #nome
-    #dataNasc
     #telefone
     #endereco
     #cidade
@@ -24,14 +23,6 @@ export default class Cliente{
 
     set nome(novaNome){
         this.#nome = novaNome;
-    }
-
-    get dataNasc(){
-        return this.#dataNasc;
-    }
-
-    set dataNasc(novaData){
-        this.#dataNasc = novaData;
     }
 
     get telefone(){
@@ -71,7 +62,6 @@ export default class Cliente{
                 cidade="", uf=""){
         this.#cpf=cpf;
         this.#nome=nome;
-        this.#dataNasc=dataNasc;
         this.#telefone = telefone;
         this.#endereco=endereco;
         this.#cidade=cidade;
@@ -85,7 +75,6 @@ export default class Cliente{
         return {
             "cpf":this.#cpf,
             "nome":this.#nome,
-            "dataNasc":this.#dataNasc,
             "telefone":this.#telefone,
             "endereco":this.#endereco,
             "cidade":this.#cidade,

@@ -58,7 +58,7 @@ export default class Cliente{
     }
 
     //construtor (criador de um produto)
-    constructor(cpf="", nome="", dataNasc="",telefone="",endereco="",
+    constructor(cpf="", nome="", telefone="",endereco="",
                 cidade="", uf=""){
         this.#cpf=cpf;
         this.#nome=nome;

@@ -8,16 +8,17 @@ export default class ClienteCtrl {
         resposta.type("application/json");
         //Verificando se o método da requisição é POST e conteúdo é JSON
         if (requisicao.method == 'POST' && requisicao.is("application/json")) {
-            const cpf = requisicao.body.cpf;
+            const cpf = requisicao.params.cpf;
             const nome = requisicao.body.nome;
+            const dataNasc = requisicao.body.dataNasc;
             const telefone = requisicao.body.telefone;
             const endereco = requisicao.body.endereco;
             const cidade = requisicao.body.cidade;
             const uf = requisicao.body.uf;
            
-            if (cpf && nome && telefone && endereco && cidade && uf) {
+            if (cpf && nome && dataNasc && telefone && endereco && cidade && uf) {
 
-                const cliente = new Cliente(cpf, nome, telefone, endereco, cidade, uf);
+                const cliente = new Cliente(cpf, nome, dataNasc, telefone, endereco, cidade, uf);
 
                     cliente.incluir()
                         .then(() => {
@@ -61,14 +62,15 @@ export default class ClienteCtrl {
             //o código será extraída da URL (padrão REST)
             const cpf = requisicao.params.cpf;
             const nome = requisicao.body.nome;
+            const dataNasc = requisicao.body.dataNasc;
             const telefone = requisicao.body.telefone;
             const endereco = requisicao.body.endereco;
             const cidade = requisicao.body.cidade;
             const uf = requisicao.body.uf;
    
-            if (cpf && nome && telefone && endereco && cidade && uf) {
+            if (cpf && nome && dataNasc && telefone && endereco && cidade && uf) {
              
-                const cliente = new Cliente(cpf, nome, telefone, endereco, cidade, uf);
+                const cliente = new Cliente(cpf, nome, dataNasc, telefone, endereco, cidade, uf);
                 cliente.alterar()
                     .then(() => {
                         resposta.status(200).json({

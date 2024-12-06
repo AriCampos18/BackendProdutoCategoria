@@ -35,7 +35,7 @@ export default class ClienteDAO {
         if (cliente instanceof Cliente) {
             const conexao = await conectar();
             const sql = `INSERT INTO cliente(clie_cpf,clie_nome,clie_dataNasc,clie_telefone,clie_endereco,clie_cidade, clie_uf)
-                values(?,?,str_to_date(?,'%Y/%m/%d'),?,?,?,?)
+                values(?,?,?,?,?,?,?)
             `;
             let parametros = [
                 cliente.cpf,
@@ -53,7 +53,7 @@ export default class ClienteDAO {
     async alterar(cliente) {
         if (cliente instanceof Cliente) {
             const conexao = await conectar();
-            const sql = `UPDATE produtocliente SET clie_nome=?,clie_dataNasc=str_to_date(?,'%Y/%m/%d'),clie_telefone=?,clie_endereco=?,clie_cidade=?, clie_estado = ?
+            const sql = `UPDATE produtocliente SET clie_nome=?,clie_dataNasc=?,clie_telefone=?,clie_endereco=?,clie_cidade=?, clie_estado = ?
                 WHERE clie_cpf = ?
             `;
             let parametros = [

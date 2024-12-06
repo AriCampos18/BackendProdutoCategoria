@@ -8,7 +8,7 @@ export default class ClienteCtrl {
         resposta.type("application/json");
         //Verificando se o método da requisição é POST e conteúdo é JSON
         if (requisicao.method == 'POST' && requisicao.is("application/json")) {
-            const cpf = requisicao.params.cpf;
+            const cpf = requisicao.body.cpf;
             const nome = requisicao.body.nome;
             const telefone = requisicao.body.telefone;
             const endereco = requisicao.body.endereco;

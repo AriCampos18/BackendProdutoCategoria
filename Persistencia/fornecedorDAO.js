@@ -22,7 +22,7 @@ export default class FornecedorDAO {
                 forn_cidade VARCHAR(350) NOT NULL,
                 forn_uf VARCHAR(70) NOT NULL,
                 CONSTRAINT pk_fornecedor PRIMARY KEY(forn_cnpj),
-            )
+            );
         `;
             await conexao.execute(sql);
             await conexao.release();

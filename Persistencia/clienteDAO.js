@@ -20,7 +20,7 @@ export default class ClienteDAO {
                 clie_cidade VARCHAR(200),
                 clie_uf VARCHAR(200),
                 CONSTRAINT pk_cliente PRIMARY KEY(clie_cpf) 
-            )
+            );
         `;
             await conexao.execute(sql);
             await conexao.release();

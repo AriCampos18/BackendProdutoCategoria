@@ -34,8 +34,8 @@ export default class Categoria {
     // Método toJSON para conversão em JSON
     toJSON() {
         return {
-            codigo: this.#codigo,
-            descricao: this.#descricao
+            "codigo": this.#codigo,
+            "descricao": this.#descricao
         };
     }
 

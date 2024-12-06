@@ -21,7 +21,7 @@ export default class UsuarioDAO {
                 fk_codigo_pri INT NOT NULL,
                 CONSTRAINT pk_usuario PRIMARY KEY(user_id),
                 CONSTRAINT fk_privilegio FOREIGN KEY(fk_codigo_pri) REFERENCES privilegio(codigo)
-            )
+            );
         `;
             await conexao.execute(sql);
             await conexao.release();

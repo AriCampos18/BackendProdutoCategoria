@@ -1,5 +1,5 @@
 import { Router } from "express"; //micro-aplicação HTTP
-import UsuarioCtrl from "../Controle/usuarioCtrl";
+import UsuarioCtrl from "../Controle/usuarioCtrl.js";
 
 const userCtrl = new UsuarioCtrl();
 const rotaUsuario = Router();

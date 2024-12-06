@@ -17,7 +17,7 @@ export default class UsuarioDAO {
                 user_email VARCHAR(200) NOT NULL,
                 user_senha VARCHAR(200) NOT NULL,
                 user_idade INT NOT NULL DEFAULT 0,
-                user_endereco VARCHAR(200),
+                user_endereco VARCHAR(200) NOT NULL,
                 fk_codigo_pri INT NOT NULL,
                 CONSTRAINT pk_usuario PRIMARY KEY(user_id),
                 CONSTRAINT fk_privilegio FOREIGN KEY(fk_codigo_pri) REFERENCES privilegio(codigo)

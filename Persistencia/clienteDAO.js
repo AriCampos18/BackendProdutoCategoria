@@ -13,9 +13,9 @@ export default class ClienteDAO {
             const conexao = await conectar(); //retorna uma conexão
             const sql = `
             CREATE TABLE IF NOT EXISTS cliente(
-                clie_cpf VARCHAR(14) NOT NULL,
+                clie_cpf VARCHAR(15) NOT NULL,
                 clie_nome VARCHAR(200) NOT NULL,
-                clie_telefone VARCHAR(100) NOT NULL,
+                clie_telefone VARCHAR(200) NOT NULL,
                 clie_endereco VARCHAR(200),
                 clie_cidade VARCHAR(200),
                 clie_uf VARCHAR(200),
@@ -34,7 +34,7 @@ export default class ClienteDAO {
         if (cliente instanceof Cliente) {
             const conexao = await conectar();
             const sql = `INSERT INTO cliente(clie_cpf,clie_nome,clie_telefone,clie_endereco,clie_cidade, clie_uf)
-                values(?,?,?,?,?,?,?)
+                values(?,?,?,?,?,?)
             `;
             let parametros = [
                 cliente.cpf,

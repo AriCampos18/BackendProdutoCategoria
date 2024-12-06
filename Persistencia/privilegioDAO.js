@@ -71,7 +71,6 @@ export default class PrivilegioDAO{
         const conexao = await conectar();
         
         const [registros, campos] = await conexao.query(sql, parametros);
-        await conexao.release();
         let listaPrivilegios=[];
         for (const registro of registros){
             const privilegio = new Privilegio(registro['codigo'],
@@ -79,7 +78,7 @@ export default class PrivilegioDAO{
             );
             listaPrivilegios.push(privilegio);
         }
-        
+        await conexao.release();
         return listaPrivilegios;
 
     }

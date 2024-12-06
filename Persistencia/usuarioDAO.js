@@ -82,7 +82,7 @@ export default class UsuarioDAO {
         }
         else {
             sql = `SELECT * FROM usuario u
-                   INNER JOIN privilegio p ON p.fk_codigo_pri = u.id
+                   INNER JOIN privilegio p ON u.fk_codigo_pri = p.id
                    WHERE user_id = ?`
             parametros = [termo];
         }

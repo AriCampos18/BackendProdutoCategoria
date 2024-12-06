@@ -96,8 +96,8 @@ export default class ProdutoCtrl {
                 if (lista.length > 0) {
                     //pseudo validação
                     if (codigo > 0 && descricao && precoCusto > 0 &&
-                        precoVenda > 0 && qtdEstoque >= 0 &&
-                        urlImagem && dataValidade && categoria.codigo > 0) {
+                    precoVenda > 0 && qtdEstoque >= 0 &&
+                    urlImagem && dataValidade && categoria.codigo > 0) {
                         //alterar o produto
                         const produto = new Produto(codigo,
                             descricao, precoCusto, precoVenda,

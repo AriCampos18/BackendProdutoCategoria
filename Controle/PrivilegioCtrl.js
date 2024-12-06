@@ -138,7 +138,7 @@ export default class PrivilegioCtrl{
                 codigo = "";
             }
 
-            const privilegios = new Privilegios();
+            const privilegios = new Privilegio();
             privilegios.consultar(codigo)
             .then((listaPrivilegios) =>{
                 resposta.status(200).json(listaPrivilegios

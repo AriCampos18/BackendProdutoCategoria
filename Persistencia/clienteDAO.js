@@ -19,7 +19,7 @@ export default class ClienteDAO {
                 clie_endereco VARCHAR(200),
                 clie_cidade VARCHAR(200),
                 clie_uf VARCHAR(200),
-                CONSTRAINT pk_cliente PRIMARY KEY(clie_cpf), 
+                CONSTRAINT pk_cliente PRIMARY KEY(clie_cpf) 
             )
         `;
             await conexao.execute(sql);
@@ -51,7 +51,7 @@ export default class ClienteDAO {
     async alterar(cliente) {
         if (cliente instanceof Cliente) {
             const conexao = await conectar();
-            const sql = `UPDATE produtocliente SET clie_nome=?,clie_telefone=?,clie_endereco=?,clie_cidade=?, clie_estado = ?
+            const sql = `UPDATE cliente SET clie_nome=?,clie_telefone=?,clie_endereco=?,clie_cidade=?, clie_estado = ?
                 WHERE clie_cpf = ?
             `;
             let parametros = [
@@ -72,12 +72,12 @@ export default class ClienteDAO {
         let sql = "";
         let parametros = [];
         if (termo=="") {
-            sql = `SELECT * FROM cliente c
+            sql = `SELECT * FROM cliente
                    WHERE clie_nome LIKE ?`;
             parametros = ['%' + termo + '%'];
         }
         else {
-            sql = `SELECT * FROM cliente c
+            sql = `SELECT * FROM cliente
                    WHERE clie_cpf = ?`
             parametros = [termo];
         }

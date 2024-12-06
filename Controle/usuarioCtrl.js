@@ -86,9 +86,9 @@ export default class UsuarioCtrl {
            priv.consultar = new Privilegio(privilegio.codigo).then((lista) => {
                 if(lista.length > 0){
                     if (id > 0 && nome && email && senha &&
-                    idade > 0 && endereco) {
+                    idade > 0 && endereco && privilegio.codigo) {
                         const usuario = new Usuario(id,
-                        nome, email, senha, idade, endereco);
+                        nome, email, senha, idade, endereco, priv);
                         usuario.alterar()
                         .then(() => {
                             resposta.status(200).json({
@@ -141,7 +141,7 @@ export default class UsuarioCtrl {
     excluir(requisicao, resposta) {
         resposta.type("application/json");
         if (requisicao.method == 'DELETE') {
-            const id = requisicao.params.codigo;
+            const id = requisicao.params.id;
             if (id > 0) {
                 const usuario = new Usuario(id);
                 usuario.excluir()

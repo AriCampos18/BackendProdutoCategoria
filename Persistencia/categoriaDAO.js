@@ -61,24 +61,24 @@ export default class CategoriaDAO{
         let sql = "";
         let parametros = [];
         if (isNaN(parseInt(termo))) {
-            sql = "SELECT * FROM categoria WHERE descricao LIKE ? ORDER BY descricao";
+            sql = "SELECT * FROM categoria WHERE descricao LIKE ?";
             parametros.push("%"+termo+"%");
         }
         else{
-            sql = "SELECT * FROM categoria WHERE codigo = ? ORDER BY descricao";
+            sql = "SELECT * FROM categoria WHERE codigo = ?";
             parametros.push(termo);
         }
         const conexao = await conectar();
         
         const [registros, campos] = await conexao.query(sql, parametros);
-        let listaCategoria=[];
+        let listaCategorias=[];
         for (const registro of registros){
             const categoria = new Categoria(registro['codigo'],
                                             registro['descricao']    
             );
-            listaCategoria.push(categoria);
+            listaCategorias.push(categoria);
         }
         await conexao.release();
-        return listaCategoria;
+        return listaCategorias;
     }
 }

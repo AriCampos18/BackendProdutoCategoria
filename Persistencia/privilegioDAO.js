@@ -61,11 +61,11 @@ export default class PrivilegioDAO{
         let sql = "";
         let parametros = [];
         if (isNaN(parseInt(termo))) {
-            sql = "SELECT * FROM privilegio WHERE descricao LIKE ? ORDER BY descricao";
+            sql = "SELECT * FROM privilegio WHERE descricao LIKE ?";
             parametros.push("%"+termo+"%");
         }
         else{
-            sql = "SELECT * FROM privilegio WHERE codigo = ? ORDER BY descricao";
+            sql = "SELECT * FROM privilegio WHERE codigo = ?";
             parametros.push(termo);
         }
         const conexao = await conectar();
